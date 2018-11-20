@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello Dojo</title>
+	<style>
+		.testClass{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js" data-dojo-config = "async:true"></script>
+	<script>
+        require([
+            'dojo/dom',
+            'dojo/domReady!'
+        ], function (dom) {
+        	var i = dom.byId('test');
+        	i.innerHTML += ' from Dojo AMD style code';
+        });
+    </script>
+	
+	<h1 id="test">Hello World!</h1>
+	<h2 class="testClass">Hello again!!</h2>
+	<h3 name="testName"> Hello using Name attribute!!</h3>
+	<div>
+		<a href="http://www.google.com">Click to go to google</a>
+	</div>
+	
+</body>
+</html>

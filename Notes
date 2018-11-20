@@ -1,0 +1,329 @@
+-DOM: Main structure
+-Nodes: Little pieces that makes up this DOm structure.
+-Modifying nodes: Repainting the web page i.e add/modify delete nodes.
+
+-Two ways to retrieve nodes:-
+	1. ID lookup: Fast , to look up Single node, needs ID attribute.
+				  Syntax: dojo.byId("id");
+	
+	2. CSS selector lookup: To look up Multiple nodes, no need of ID attribute, slower than ID lookup.
+				  Syntax: dojo.query();
+
+***Make sure page is loaded before retrieving nodes.
+
+Two ways-
+
+1. Legacy.
+2. Modern - AMD
+
+Legacy Syntax:
+----------------
+dojo.ready(function(){});
+
+AMD: Asynchronous module definition which loads modules(nothing but a .js file) on demand.
+
+AMD loader: on page load; makes use of below two functions-
+	1. require.
+	2. define
+	
+AMD syntax:
+------------
+-require([module1, module2,.....], function(module1, module2,......){});
+-require(["dojo/domReady!"], function(){});
+
+-define([module1, module2,.....], function(module1, module2,......){});
+
+DOM Functions:
+===============
+1. Query/Retrieval
+2. Placement
+3. Create
+4. Place
+5. Destroy
+
+Event Handling/DOM Events
+===========================
+-Scenarios that are triggered when certain actions are performed.
+-Lets us define what we want to do and when
+-Allows interaction between DOM elements and javascript.
+-Different browsers have different implementations.
+-Event handling is a must for responsive and interactive web applications.
+
+Commonly used events in dojo are-
+================================
+-click
+-focus
+-blur
+-change
+-keypress
+-mourseover
+-mouseout
+-dojo/mouse#enter
+-dojo/mouse#leave
+-submit
+
+dojo/On module:
+===============
+-provides functionality for event listening and event dispatching(generating events).
+-Light weight , fast and support modern browsers.
+-abstracts all cross browser event models to provide a consistent event handling mechanism across browsers.
+
+-Syntax:
+	-For Single node:
+		require(["dojo/on"],function(on){
+			on(target,"event", function(e){
+				//handle the event.
+			});		
+		});
+
+Event Handle:
+
+var handle = on(myButton, "click" , function(evt){
+});
+
+	-Multiple Nodes:
+	
+	
+	
+	
+dojo/mouse module:
+===================
+-This module provides extension events for hovering and mouse button utility functions.
+
+dojo/domstyle module:
+=====================
+-This module defines the core dojo DOM style API. The convention for the return variable for this module is domStyle or style.
+- Methods available are - 
+	-get(targetNode, "css_property")
+	-set(targetNode, "css_property", NewValue);
+	-getComputedStyle(targetNode);
+
+dojo/topic module:
+=====================
+This module provides a centralized hub for publishing and subscribing to global messages by topic. Topics can be subscribed to by using topic.subscribe(), 
+and messages can publish by using topic.publish().
+
+Because topics are not bound to a particular object, they are useful for communication between multiple instances or various different types of objects.
+dojo/on is more designed to deal with handling events specifically related to a particular object instance or reflecting a DOM event of a particular instance.
+
+-Syntax:
+	Method-1:
+	----------
+		-For publish:	 
+			topic.publish("topic name" , ["param1" , "param2" , "param3",...]);
+	
+		-For Subscribe:
+			topic.subscribe("topic name", function(params){
+				--- write event handling code here.........
+			});
+			
+	Method-2: 
+	----------
+		-For publish:
+			topic.publish("topic name" , "param1" , "param2" , "param3",...);
+	
+		-For Subscribe:
+			topic.subscribe("topic name", function(param1,param2,param3,...){
+				--- write event handling code here........
+			});
+			
+			
+	Method-3: 
+	----------
+		-For publish:
+			topic.publish("topic name" , {p1:"param1", p2:"param2", p3:"param3",.....});
+	
+		-For Subscribe:
+			topic.subscribe("topic name", function(params){
+				params.p1
+				params.p2........
+				--- write event handling code here........
+			});
+		
+Note: 1. Topic name must be unique. No globbing(can't define as topic^/topic*) allowed.
+	  2. Subscribe returns an event handle; can be removed. 
+
+	  
+Dom Function: Placement
+========================
+-dom-construct module.
+-Move nodes around in the dom.
+
+Syntax:
+-3 arguments: Node, ref, pos(optional; by default last)
+
+domConstruct.place(targetNode, RefNode, position);
+
+Dom Function: EMPTY:
+======================
+domConstruct.empty(<Node_which_we_want_to_empty>);
+
+Dom Function: DESTROY:
+======================
+domConstruct.destroy(<Node_which_we_want_to_remove>);
+
+Note: Difference between empty and destroy is that empty simply removes the content of the node and node itself will not be removed whereas destroy delete the node itself.
+
+
+DOJO EFFECTS:
+*****************
+-It creates smoother user experience.
+
+Two modules-
+1. dojo/_base/fx: it has base effects methods.
+2. dojo/fx: It has advanced effects.
+
+Effects:
+--------
+fadein, fadeout, wipein, wipeout, slideto, easing, chaining, combining.
+
+FADE:
++++++++++
+1. Fadein
+2. Fadeout
+
+Syntax:
+fx.fadeIn({parameters});
+fx.fadeOut({parameters});
+
+where fx is the dojo/_base/fx module.
+use .play(); to play the animation.
+
+dojo/fx/easing module:
+**********************
+To apply effects in a fency way. Refer-  https://dojotoolkit.org/reference-guide/1.10/dojo/fx/easing.html
+
+WIPE:
++++++++++
+1. Wipein
+2. Wipeout
+
+It is present in dojo/fx module.
+
+Syntax:
+wipeIn({parameters});  // It automatically set the height to auto.
+wipeOut({parameters});
+
+ SLIDETO:
++++++++++
+-It moves the nodes around.
+-It is present in dojo/fx module.
+
+Synatax:
+fx.slideTo({parameters});
+node, top, left
+
+
+AnimateProperty:
+=================
+-To animate any css property.
+-Resides inside dojo/_base/fx module.
+
+fx.animateProperty({
+	node:"nodeId",
+	properties:  {cssProperty1: value,		(e.g. width: 300px;)
+				  cssProperty2: {start:value1, end:value2},		(e.g. height: {start: 100px, end: 200px})
+				  cssProperty3: {end:value1, unit:unitType}		(e.g. width: {end: 300, unit: "pt" or "px"})
+	}
+});
+
+
+Chaining and combining:
+=========================
+-These concepts are used to play more than one animation simultaneously.
+-Present in dojo/fx module.
+
+combine([animation1, animation2, etc...]);
+chain([animation1, animation2, etc...]);
+
+Animation Events:
+==================
+- Used for listening to and performing custom actions before, during and after the animation.
+- Animation controls: play, pause, stop.
+1. beforeBegin.
+2. onBegin.
+3. onPlay.
+4. onAnimate.
+5. onEnd.
+
+Syntax:
+--------
+1. first way-
+
+fx.fadeOut({
+node: "nodeId",
+duration: 1000,
+delay: 2000,
+beforeBegin:function(){
+	----steps
+},
+
+onEnd:function(){
+
+-------
+
+}
+});
+
+2. Second way-
+
+var fadeOutAnimation = fx.fadeOut({node: "nodeId" , duration:2000});
+
+on(fadeOutAnimation, "onEnd" , function(){
+	-----steps
+});
+
+
+Server communication with DOO:
+++++++++++++++++++++++++++++++
+
+dojo/request module:
+---------------------
+dojo/request submodules-
+
+1. dojo/request/xhr  (xmlHttpRequest)
+2. dojo/request/node
+3. dojo/request/iframe
+4. dojo/request/script
+
+dojo/request Syntax:
+-----------------------
+require(["dojo/request"], function(request){
+request("URL" , {optional params}).then(
+function(data){
+	//success scenario steps
+},
+
+function(err){
+	//error condition steps
+}
+});
+
+
+-response will be in either XML, JSON, etc....
+- var employee = {"id": "12345" , "name": "Shivkumar Napit" , "title": "SA" , "email": "Shivkumar.napit@gmail.com"};
+- var brands = {"car": ["honda" , "toyota" , "nissan"]};
+
+- Accessing json data?
+	employee.id, employee.name, .etc
+	employee["id"], employee["name"], etc
+	
+	by Index:
+		var x = brands.car[0];
+		
+	by Loop:
+		for(i in brands.car){
+			console.log(i);
+		}
+
+- Modifying json data?
+	employee.id = "33454";
+	employee["name"] = "newValue";
+	
+- Convert json into other objects?
+	JSON.stringify(jsonObj);
+	JSON.parse(string);
+
+	
+
+

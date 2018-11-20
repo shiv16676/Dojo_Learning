@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dojo Placement Demo: part2</title>
+</head>
+<body>
+	<h1>Demo: Placement functionality</h1>
+	<ul id="list">
+		<li id="one">ONE</li>
+		<li id="two">TWO</li>
+		<li id="three" style="color:red">THREE</li>
+		<li id="four">FOUR</li>
+		<li id="five">FIVE</li>
+	</ul>
+	
+	<button id="moveToTheTop">MoveToTop</button>
+	<button id="moveToTheBottom">MoveToBottom</button>
+	<button id="movebeforefive">MoveBeforeFive</button>
+	<button id="moveafterone">MoveAfterOne</button>
+	<button id="replaceFour">ReplaceFour</button>
+	<button id="replaceAll">ReplaceAll</button>
+	<button id="moveToFifthPlace">moveToFifthPlace</button>
+	<h3>Click to make the THREE, the first/last item on the list</h3>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	
+	<script>
+		require(["dojo/dom" , "dojo/on" , "dojo/dom-construct", "dojo/domReady!"],function(dom, on , domConstruct){
+			var list = dom.byId("list");
+			var three = dom.byId("three");
+			var five = dom.byId("five");
+			var one = dom.byId("one");
+			var four = dom.byId("four");
+			
+			var topButton = dom.byId("moveToTheTop");
+			var bottomButton = dom.byId("moveToTheBottom");
+			var movebeforefiveButton = dom.byId("movebeforefive");
+			var moveafteroneButton = dom.byId("moveafterone"); 
+			var replaceFourButton = dom.byId("replaceFour");
+			var replaceAllButton = dom.byId("replaceAll");
+			var moveToFifthPlaceButton = dom.byId("moveToFifthPlace");
+			
+			function moveToTheTop(){
+				domConstruct.place(three, list, "first");
+			}
+			
+			function moveToTheBottom(){
+				domConstruct.place(three,list,"last");   //both works , with/without pos defined.
+				domConstruct.place(three,list);
+			}
+			
+			function movebeforefive(){
+				domConstruct.place(three,five,"before");
+			}
+			
+			function moveafterone(){
+				domConstruct.place(three,one,"after");
+			}
+			
+			function replaceFour(){
+				domConstruct.place(three,four,"replace");
+			}
+			
+			function replaceAll(){
+				domConstruct.place(three,list,"only"); // three will be the only be the child element in the 'list' node.
+			}
+			
+			function moveToFifthPlace(){
+				domConstruct.place(three,list,"4");  // This will place three as the 5th element of list node
+			}
+			
+			<!-- Bind the onclick event to the the buttons-->
+			on(topButton, "click" , moveToTheTop);
+			on(bottomButton, "click" , moveToTheBottom);
+			on(movebeforefiveButton, "click" , movebeforefive);
+			on(moveafteroneButton, "click" , moveafterone);
+			on(replaceFourButton, "click" , replaceFour);
+			on(replaceAllButton, "click" , replaceAll);
+			on(moveToFifthPlaceButton, "click" , moveToFifthPlace);
+		});
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DOJO FX - AnimateProperty</title>
+</head>
+<body>
+	<h1>DEMO: DOJO FX - AnimateProperty</h1>
+	
+	<div id="testNode" style="background:green;width:500px;height:500px;display:block;"></div>
+	
+	<button id="shrink">Shrink and Red</button>
+	<button id="grow">Grow and Green</button>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	
+	<script>
+		require(["dojo/dom","dojo/on","dojo/_base/fx","dojo/domReady!"],function(dom,on,fx){
+
+			var testNode = dom.byId("testNode");
+			var greenButton = dom.byId("grow");
+			var redButton = dom.byId("shrink");
+			
+			var redButtonAnimation = fx.animateProperty({
+				node: testNode,
+				properties: {
+					backgroundColor: "red",
+					height: 100,
+					width: 100
+				},
+				duration:3000,
+				delay:1000, 
+			});
+			
+			var greenButtonAnimation = fx.animateProperty({
+				node: testNode,
+				properties: {
+					backgroundColor: "green",
+					height: 500,
+					width: 500
+				},
+				duration:3000,
+				delay:1000, 
+			});
+			
+			
+			on(redButton, "click", function(){
+				redButtonAnimation.play();
+			});
+			
+			on(greenButton, "click", function(){
+				greenButtonAnimation.play();
+			});
+			
+			
+		});
+	</script>
+</body>
+</html>
+
+
+<!-- Try now with other two syntax for more clarification. -->

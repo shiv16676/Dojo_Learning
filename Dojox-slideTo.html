@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DOJO FX - Slide</title>
+</head>
+<body>
+	<h1>DEMO: DOJO FX - Slide</h1>
+	
+	<div id="testNode" style="background:yellow;width:200px;display:block; text-align:center;">Hello DOJO test1 test2 test3 test4 test5</div>
+	
+	<button id="slideout">Slide Out</button>
+	<button id="slidein">Slide In</button>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	
+	<script>
+		require(["dojo/dom","dojo/on","dojo/fx","dojo/fx/easing","dojo/domReady!"],function(dom,on,fx,easy){
+
+			var testNode = dom.byId("testNode");
+			var slideInButton = dom.byId("slidein");
+			var slideOutButton = dom.byId("slideout");
+			
+			on(slideOutButton, "click", function(){
+				var slideOutButtonAnimation = fx.slideTo({node:testNode,delay:1000,duration:4000, easing:easy.bounceOut, top:300,left:700});
+				slideOutButtonAnimation.play();
+			});
+			
+			on(slideInButton, "click", function(){
+				var slideInButtonAnimation = fx.slideTo({node:testNode,duration:5000, easing:easy.bounceIn,top:100,left:10});
+				slideInButtonAnimation.play();
+			});
+			
+		});
+	</script>
+	
+	
+</body>
+</html>

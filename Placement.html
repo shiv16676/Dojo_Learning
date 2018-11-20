@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dojo Placement Demo</title>
+</head>
+<body>
+	<h1>Demo: Placement functionality</h1>
+	<ul id="list">
+		<li id="one">ONE</li>
+		<li id="two">TWO</li>
+		<li id="three" style="color:red">THREE</li>
+		<li id="four">FOUR</li>
+		<li id="five">FIVE</li>
+	</ul>
+	
+	<button id="moveToTheTop">MoveToTop</button>
+	<button id="moveToTheBottom">MoveToBottom</button>
+	<h3>Click to make the THREE, the first/last item on the list</h3>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	
+	<script>
+		require(["dojo/dom" , "dojo/on" , "dojo/dom-construct", "dojo/domReady!"],function(dom, on , domConstruct){
+			var list = dom.byId("list");
+			var three = dom.byId("three");
+			var topButton = dom.byId("moveToTheTop");
+			var bottomButton = dom.byId("moveToTheBottom");
+			
+			function moveToTheTop(){
+				//domConstruct.place(three, list); //By default it will place the element to the last,So if we want to place other than last,we need to specify here.
+				domConstruct.place(three, list, "first");
+			}
+			
+			function moveToTheBottom(){
+				domConstruct.place(three,list,"last");   //both works , with/without pos defined.
+				domConstruct.place(three,list);
+			}
+			
+			<!-- Bind the onclick event to the the buttons-->
+			on(topButton, "click" , moveToTheTop);
+			on(bottomButton, "click" , moveToTheBottom);
+		});
+	</script>
+	
+</body>
+</html>

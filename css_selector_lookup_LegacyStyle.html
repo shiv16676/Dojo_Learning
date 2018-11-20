@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello Dojo</title>
+	<style>
+		.testClass{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	<script>
+		dojo.ready(
+			function(){
+				var i = dojo.query("#test");
+				console.log(i[0].innerHTML);	<!-- since query() returns array in response -->
+				i[0].innerHTML = "Test Hello";
+			}		
+		);
+	</script>
+	
+	<h1 id="test">Hello World!</h1>
+	<h2 class="testClass">Hello again!!</h2>
+	<h3 name="testName"> Hello using Name attribute!!</h3>
+	
+	<div>
+		<a href="http://www.google.com">Click to go to google</a>
+	</div>
+	
+</body>
+</html>

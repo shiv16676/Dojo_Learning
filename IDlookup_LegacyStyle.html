@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello Dojo</title>
+</head>
+<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+	<script>
+		dojo.ready(
+			function(){
+				var i = dojo.byId("test");
+				console.log(i.innerHTML);
+				i.innerHTML = "Test Hello";
+			}		
+		);
+	</script>
+	
+	<h1 id="test">Hello World!</h1>
+	
+</body>
+</html>

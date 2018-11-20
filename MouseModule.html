@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Demo for on module</title>
+</head>
+
+<body>
+	<div id="myDiv"> MouseOver to change my background to yellow.</div>
+	<button id="showDiv">showDive</button>
+	<button id="hideDiv">HideDiv</button>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js" data-dojo-config = "async:true"></script>
+	
+	<script>
+        require(["dojo/dom","dojo/on", "dojo/mouse" ,"dojo/domReady!"], function (dom,on,mouse) {
+        	
+        	var showButton = dom.byId("showDiv");
+        	var hideButton = dom.byId("hideDiv");
+        	var div = dom.byId("myDiv");
+        	
+        	on(div, mouse.enter , function(event){
+        		div.innerHTML = "Move mouse pointer away to change the color to white";
+        		div.style.background = "yellow";
+        	});
+        	
+        	on(div, mouse.leave , function(event){
+        		div.style.background = "white";
+        		div.innerHTML = "Mouse over to change my background to yellow.";
+        	});
+        	
+        	<!-- we need to change from onClick to mousedown -->
+        	on(hideButton, "mousedown" , function(event){
+        		if(mouse.isLeft(event)){
+        			alert("Mouse left button is clicked");
+        			div.style.display = "none";
+        		}else if(mouse.isRight(event)){
+        			alert("Mouse right button is clicked. You are not allowed to perform this action");
+        		}
+        	});
+        	
+        	
+        	on(showButton, "click" , function(event){
+        		if(div.style.display == "none"){
+        			div.style.display = "block";
+        		}
+        	});
+        	
+        });
+    </script>
+	
+</body>
+</html>
