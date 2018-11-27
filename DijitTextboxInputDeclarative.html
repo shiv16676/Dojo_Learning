@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>DOJO Dijit textbox</title>
+</head>
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css" media="screen">
+	
+<body class="claro">
+	<h1>DEMO: DIJIT/TEXT BOX</h1>
+	
+	<div>
+		<label for="textBX">Name: </label>
+		<input id="textBX" data-dojo-type="dijit/form/TextBox"  data-dojo-props="placeHolder: 'Enter a value'" />
+	</div>
+	
+	<div>
+		<label for="textArea">Details: </label>
+		<textarea id="textArea" data-dojo-type="dijit/form/SimpleTextarea" data-dojo-props="cols:50,rows:8,onFocus:function(){
+			console.log('Simple text area focused');},
+		 onBlur:function(){
+		 	console.log('simple text area blurred');}" >Sample text here...</textarea>
+	</div>
+	
+	<div>
+		<label for="textArea1">MoreDetails: </label>
+		<textarea id="textArea1" data-dojo-type="dijit/form/Textarea" data-dojo-props="cols:50,onFocus:function(){
+			console.log('text area focused');},
+		 onBlur:function(){
+		 	console.log('text area blurred');}" >Sample text here...</textarea>
+	</div>
+	
+	<div>
+		<label for="NtextBX">Width: </label>	<!-- Try other props like constraints:{min:100, max:500} -->
+		<input id="NtextBX" value="40" data-dojo-type="dijit/form/NumberTextBox"  data-dojo-props="required:true,invalidMessage:'Only numbers allowed!'" />
+	</div>
+	
+	<div>
+		<label for="CtextBX">Price: </label>	
+		<input id="CtextBX" value="40" data-dojo-type="dijit/form/CurrencyTextBox"  data-dojo-props="currency:'USD',required:true,invalidMessage:'Only Money allowed!'" />
+	</div>
+	
+	<div>
+		<label for="NStextBX">Number Spinner: </label>
+		<input id="NStextBX" data-dojo-type="dijit/form/NumberSpinner" value="10" 
+			data-dojo-props="constraints:{min:100,max:1000,places:2},placeHolder:'Enter a value',smallDelta:5" />
+	</div>
+	
+	<div>
+		<label for="VtextBX">Validation Box: </label>
+		<input id="VtextBX" data-dojo-type="dijit/form/ValidationTextBox"  data-dojo-props="regExp:'[\\w]+',placeHolder: 'Enter a value'" />
+	</div>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async:false, parseOnLoad:true"></script>
+	
+	<script>
+		require(["dojo/parser","dijit/form/TextBox","dijit/form/SimpleTextarea","dijit/form/Textarea","dijit/form/NumberTextBox"
+			,"dijit/form/CurrencyTextBox","dijit/form/NumberSpinner","dijit/form/ValidationTextBox","dojo/domReady!"]);	
+	</script>
+	
+	
+</body>
+</html>
