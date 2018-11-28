@@ -323,7 +323,30 @@ function(err){
 - Convert json into other objects?
 	JSON.stringify(jsonObj);
 	JSON.parse(string);
-
 	
+	
+Digit library:
+++++++++++++++++
+-Digit is the Dojo's UI library layered on top of dojo.
+-Collection of widgets to help you rapidly develop web applications with ease.
+-Develop reusable components with very little HTML, JS and css code.
+-Provides consistent UX across the application: customizable.
+-Supports all major browsers i.e. Chrome, IE, Firefox, Safari, etc
+
+Dijit layout widgets:
+++++++++++++++++++++++
+-components that can be used to create page layout.
+-Widgets divided into 2 categories- Panes & Containers.
+
+	a. Containers: Pane holders or page holders.
+		-dijit/layout/BorderContainer
+		-dijit/layout/AccordionContainer
+		-dijit/layout/TabContainer
+		-dijit/layout/StackContainer
+	
+	b. Panes: Actual content holders.
+		-dijit/layout/ContentPane
+		-dijit/layout/AccordionPane
+		-dijit/TitlePane
 
 
